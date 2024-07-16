@@ -1,1 +1,3 @@
-# python_devcontainer
+# Devcontainer (Python)
+
+An opinionated template-ish Devcontainer setup.
