@@ -1,0 +1,34 @@
+version: '3'
+
+env:
+  PYTHON_FOLDERS: "hello_world tests"
+  TEST_FOLDERS: "tests"
+
+tasks:
+  install:
+    desc: Install dependencies.
+    cmds:
+      - poetry install
+
+  fmt:
+    desc: Run linting and fix issues.
+    cmds:
+      - poetry run black .
+      - poetry run ruff check {{.PYTHON_FOLDERS}} --fix
+
+  lint:
+    desc: Run linting tasks.
+    cmds:
+      - poetry run black .
+      - poetry run ruff check {{.PYTHON_FOLDERS}}
+      - poetry run mypy {{.PYTHON_FOLDERS}}
+
+  test:
+    desc: Run tests
+    cmds:
+      - poetry run pytest {{.TEST_FOLDERS}}
+
+  build:
+    desc: Build artifact
+    cmds:
+      - poetry build
